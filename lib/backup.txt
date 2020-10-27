@@ -1,0 +1,108 @@
+final List<Widget> imageSliders = imgList
+      .map((item) => Container(
+            child: Container(
+              width: 80,
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(item, fit: BoxFit.fill, width: 1000.0),
+                      Positioned(
+                        bottom: 0.0,
+                        left: 0.0,
+                        right: 0.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(200, 0, 0, 0),
+                                Color.fromARGB(0, 0, 0, 0)
+                              ],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20.0),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
+          ))
+      .toList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //Row Carousal Custom Demo
+
+
+      import 'package:flutter/material.dart';
+
+      class WallPage extends StatefulWidget {
+        @override
+        _WallPageState createState() => _WallPageState();
+      }
+
+      class _WallPageState extends State<WallPage> {
+        @override
+        Widget build(BuildContext context) {
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+              child: Container(
+                child: ListView(
+                  addAutomaticKeepAlives: false,
+                  padding: const EdgeInsets.all(12),
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          height: 143,
+                          width: 264,
+                          color: Colors.white,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          height: 143,
+                          width: 264,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          height: 143,
+                          width: 264,
+                          color: Colors.white,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          height: 143,
+                          width: 264,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+      }
