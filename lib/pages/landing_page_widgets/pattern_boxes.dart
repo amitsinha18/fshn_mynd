@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-String _topBox1 = 'assets/images/326x150_1.png';
+String _topBox1='' ;
 String _topBox2 = 'assets/images/326x150_2.png';
 String _topBox3 = 'assets/images/326x150_3.png';
 
@@ -9,13 +11,33 @@ String _longBox2 = 'assets/images/157x240_2.png';
 String _longBox3 = 'assets/images/157x240_3.png';
 
 String _smBox1 = 'assets/images/153x115_1.png';
+
 String _smBox2 = 'assets/images/153x115_2.png';
 String _smBox3 = 'assets/images/153x115_3.png';
 String _smBox4 = 'assets/images/153x115_4.png';
 String _smBox5 = 'assets/images/153x115_5.png';
 String _smBox6 = 'assets/images/153x115_6.png';
 
-class PatternBox1 extends StatelessWidget {
+class PatternBox1 extends StatefulWidget {
+  @override
+  _DashState createState() => _DashState();
+}
+
+class _DashState extends State<PatternBox1> {
+
+  @override
+  void initState() {
+
+
+     FirebaseFirestore.instance.collection("crol").doc('crol1').get().then((value) async{
+       _topBox1 =await value.data()['pic'];
+
+
+      print(value.data()['pic']);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,10 +45,10 @@ class PatternBox1 extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
+            child: Image.network(_topBox1,fit: BoxFit.cover,),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                image: DecorationImage(
-                    image: AssetImage(_topBox1), fit: BoxFit.fill)),
+                ),
             margin: EdgeInsets.only(bottom: 10),
             width: 326,
             height: 150,

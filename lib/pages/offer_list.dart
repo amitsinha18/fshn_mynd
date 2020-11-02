@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
+
 class OfferList extends StatefulWidget {
   @override
   _OfferListState createState() => _OfferListState();
@@ -111,93 +113,7 @@ class _OfferListState extends State<OfferList> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 60,
-        color: Colors.black,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 70),
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/home');
-                        },
-                        child: Container(
-                          child: Icon(
-                            Icons.home,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Home',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/wall');
-                        },
-                        child: Container(
-                          child: Icon(
-                            Icons.wallpaper,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Wall',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 70),
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Icon(
-                          Icons.face,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Text(
-                        'Profile',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

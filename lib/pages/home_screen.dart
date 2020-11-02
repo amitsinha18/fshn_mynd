@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/cat_carousel.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/featured1.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/pattern_boxes.dart';
+import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -82,96 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ]),
-      bottomNavigationBar: Container(
-        height: 60,
-        color: Colors.black,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 70),
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () => print('Container Pressed'),
-                        child: Container(
-                          child: Icon(
-                            Icons.home,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Home',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/wall');
-                        },
-                        child: Container(
-                          child: Icon(
-                            Icons.wallpaper,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Wall',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 70),
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/profile');
-                        },
-                        child: Container(
-                          child: Icon(
-                            Icons.face,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Profile',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
