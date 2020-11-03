@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yt_tutorial_app/pages/home_screen.dart';
 
-
 String _topBox1='';
 String _smBox1='';
 
@@ -27,7 +26,6 @@ class PatternBox1 extends StatefulWidget {
   _DashState createState() => _DashState();
 }
 
-
 class _DashState extends State<PatternBox1> {
   @override
   void initState() {
@@ -50,18 +48,24 @@ class _DashState extends State<PatternBox1> {
       _smBox2 = await value.data()['image'];
     });
   }
+
   @override
   Widget build(BuildContext context) {
-
-    return Container (
+    return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.all(20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            child: Image.network(_topBox1,fit: BoxFit.cover,),
+            child: Image.network(
+              _topBox1,
+              fit: BoxFit.cover,
+            ),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                ),
+              borderRadius: BorderRadius.circular(6),
+            ),
             margin: EdgeInsets.only(bottom: 10),
             width: 326,
             height: 150,
@@ -69,35 +73,35 @@ class _DashState extends State<PatternBox1> {
           Row(
             children: [
               Container(
-                child: Image.network(_longBox1 ,fit: BoxFit.cover,),
                 margin: EdgeInsets.only(),
                 width: 157,
                 height: 240,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    ),
+                    image: DecorationImage(
+                        image: AssetImage(_longBox1), fit: BoxFit.fill)),
               ),
               Container(
                 margin: EdgeInsets.only(left: 10),
                 child: Column(
                   children: [
                     Container(
-                      child: Image.network(_smBox1 ,fit: BoxFit.cover,),
                       margin: EdgeInsets.only(bottom: 5),
                       width: 153,
                       height: 115,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          ),
+                          image: DecorationImage(
+                              image: AssetImage(_smBox1), fit: BoxFit.fill)),
                     ),
                     Container(
-                      child: Image.network(_smBox2 ,fit: BoxFit.cover,),
-                      margin: EdgeInsets.only(bottom: 5),
+                      margin: EdgeInsets.only(top: 5),
                       width: 153,
                       height: 115,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
+                          borderRadius: BorderRadius.circular(6),
+                          image: DecorationImage(
+                              image: AssetImage(_smBox2), fit: BoxFit.cover)),
                     )
                   ],
                 ),
@@ -114,8 +118,11 @@ class PatternBox2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.all(20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -174,8 +181,11 @@ class PatternBox3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.all(20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -229,3 +239,97 @@ class PatternBox3 extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+// class PatternBox1 extends StatefulWidget {
+//   @override
+//   _DashState createState() => _DashState();
+// }
+//
+//
+// // class _DashState extends State<PatternBox1> {
+// //   @override
+// //   void initState() {
+// //     super.initState();
+// //
+// //     FirebaseFirestore.instance.collection("crol").doc('crol1').get().then((
+// //         value) {
+// //       _topBox1 = value.data()['image'];
+// //     });
+// //     FirebaseFirestore.instance.collection("crol").doc('crol2').get().then((
+// //         value) async {
+// //       _longBox1 = await value.data()['image'];
+// //     });
+// //     FirebaseFirestore.instance.collection("crol").doc('crol3').get().then((
+// //         value) async {
+// //       _smBox1 = await value.data()['image'];
+// //     });
+// //     FirebaseFirestore.instance.collection("crol").doc('crol4').get().then((
+// //         value) async {
+// //       _smBox2 = await value.data()['image'];
+// //     });
+// //   }
+// //   @override
+// //   Widget build(BuildContext context) {
+// //
+// //     return Container (
+// //       margin: EdgeInsets.all(20),
+// //       child: Column(
+// //         children: <Widget>[
+// //           Container(
+// //             child: Image.network(_topBox1,fit: BoxFit.cover,),
+// //             decoration: BoxDecoration(
+// //                 borderRadius: BorderRadius.circular(6),
+// //                 ),
+// //             margin: EdgeInsets.only(bottom: 10),
+// //             width: 326,
+// //             height: 150,
+// //           ),
+// //           Row(
+// //             children: [
+// //               Container(
+// //                 child: Image.network(_longBox1 ,fit: BoxFit.cover,),
+// //                 margin: EdgeInsets.only(),
+// //                 width: 157,
+// //                 height: 240,
+// //                 decoration: BoxDecoration(
+// //                     borderRadius: BorderRadius.circular(6),
+// //                     ),
+// //               ),
+// //               Container(
+// //                 margin: EdgeInsets.only(left: 10),
+// //                 child: Column(
+// //                   children: [
+// //                     Container(
+// //                       child: Image.network(_smBox1 ,fit: BoxFit.cover,),
+// //                       margin: EdgeInsets.only(bottom: 5),
+// //                       width: 153,
+// //                       height: 115,
+// //                       decoration: BoxDecoration(
+// //                           borderRadius: BorderRadius.circular(6),
+// //                           ),
+// //                     ),
+// //                     Container(
+// //                       child: Image.network(_smBox2 ,fit: BoxFit.cover,),
+// //                       margin: EdgeInsets.only(bottom: 5),
+// //                       width: 153,
+// //                       height: 115,
+// //                       decoration: BoxDecoration(
+// //                         borderRadius: BorderRadius.circular(6),
+// //                       ),
+// //                     )
+// //                   ],
+// //                 ),
+// //               )
+// //             ],
+// //           )
+// //         ],
+// //       ),
+// //     );
+// //   }
+// // }
+

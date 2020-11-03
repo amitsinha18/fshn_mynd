@@ -65,6 +65,7 @@ class Auth {
 
   Future<String> signOutGoogle() async {
     await GoogleSignIn().signOut();
+    _auth.signOut();
     print("User Signed Out");
   }
   //register to firestore

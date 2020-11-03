@@ -5,11 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android-app.iml" group="android/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-468845761/cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-468845761/cloud_firestore.iml" group="android/cloud_firestore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1128869917/firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-1128869917/firebase_auth.iml" group="android/firebase_auth" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1083623422/firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-1083623422/firebase_core.iml" group="android/firebase_core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e-android.iml" filepath="$PROJECT_DIR$/.idea/modules/flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e-android.iml" group="android" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2060481245/google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/2060481245/google_sign_in.iml" group="android/google_sign_in" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-182197393/io.flutter.plugins.firebase.auth-firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-182197393/io.flutter.plugins.firebase.auth-firebase_auth.iml" group="android/firebase_auth" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1249616949/io.flutter.plugins.firebase.cloudfirestore-cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-1249616949/io.flutter.plugins.firebase.cloudfirestore-cloud_firestore.iml" group="android/cloud_firestore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-360348938/io.flutter.plugins.firebase.core-firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-360348938/io.flutter.plugins.firebase.core-firebase_core.iml" group="android/firebase_core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1102775959/io.flutter.plugins.googlesignin-google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/-1102775959/io.flutter.plugins.googlesignin-google_sign_in.iml" group="android/google_sign_in" />
     </modules>
   </component>
 </project>

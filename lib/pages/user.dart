@@ -2,8 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yt_tutorial_app/pages/login.dart';
 import 'package:yt_tutorial_app/services/auth.dart';
-import 'file:///C:/Users/Mohammed%20Jassim/AndroidStudioProjects/flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e/lib/pages/landing_page_widgets/bottom_navBar.dart';
+import 'landing_page_widgets/bottom_navBar.dart';
 
+String _name = ('harry r').toUpperCase();
+String _email = 'admin@email.com';
+String _number = '992312341';
+String _dob = '12/12/12';
+String _myPoints = '120';
 
 class UserPage extends StatefulWidget {
   @override
@@ -16,42 +21,38 @@ class _UserPageState extends State<UserPage> {
   double _width = 326;
   double _height = 52;
   double _height2 = 52;
-  String _name = 'Harry R';
   int _ct = 0;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<void> _signOut() async {
-    await _auth.signOut();
-
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: <Widget>[
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 60, left: 20),
-                width: 90,
-                height: 93,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(_proPic),
+          Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(top: 60),
+            child: Column(
+              children: [
+                Container(
+                  width: 90,
+                  height: 93,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(_proPic),
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 110, top: 115),
-                child: Text(
-                  _name,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontFamily: 'Montserrat Regular',
-                      fontWeight: FontWeight.w600),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Text(
+                    _name,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontFamily: 'Montserrat Regular',
+                        fontWeight: FontWeight.w400),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           //Profile Box
           Stack(children: [
@@ -59,234 +60,341 @@ class _UserPageState extends State<UserPage> {
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: 100),
               child: InkWell(
-                onTap: () {
-                  setState(() {
-                    if (_ct == 0) {
-                      _height = (52 + 110).toDouble();
-                      _height2 = (52);
-                      _ct++;
-                    } else if (_ct == 1) {
-                      _height = (52);
-                      _ct = 0;
-                    }
-                  });
-                },
-                onLongPress: () {
-                  Navigator.of(context).pushNamed('/profile');
-                },
-                child: AnimatedContainer(
-                    width: _width,
-                    height: _height,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(91, 134, 0, 1),
-                        borderRadius: BorderRadius.circular(20)),
-                    duration: Duration(milliseconds: 300)),
-              ),
+                  onTap: () {
+                    setState(() {
+                      if (_ct == 0) {
+                        _height = (52 + 110).toDouble();
+                        _height2 = (52);
+                        _ct++;
+                      } else if (_ct == 1) {
+                        _height = (52);
+                        _ct = 0;
+                      }
+                    });
+                  },
+                  onLongPress: () {
+                    Navigator.of(context).pushNamed('/profile');
+                  },
+                  child: Stack(
+                    children: [
+                      AnimatedContainer(
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 50,
+                                left: 50,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        _name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Montserrat Regular',
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _email,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Montserrat Regular',
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _number,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Montserrat Regular',
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _dob,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Montserrat Regular',
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin:
+                                      EdgeInsets.only(top: 10, left: 60),
+                                      child: Text(
+                                        '(Press Hold)',
+                                        style: TextStyle(color: Colors.white60),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          width: _width,
+                          height: _height,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.red,
+                                  blurRadius: 5.0,
+                                )
+                              ],
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(20)),
+                          duration: Duration(milliseconds: 300)),
+                      Positioned(
+                          top: 15,
+                          left: 20,
+                          child: Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Icon(
+                                  Icons.supervised_user_circle,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                child: Text(
+                                  'Profile',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat Bold',
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  )),
             ),
-            Positioned(
-                top: 115,
-                left: 20,
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.supervised_user_circle,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      child: Text(
-                        'Profile',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat Bold',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                )),
           ]),
           //Reward Box
           Stack(children: [
             Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 10),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    if (_ct == 0) {
-                      _height2 = (52 + 110).toDouble();
-                      _height = (52);
-                      _ct++;
-                    } else if (_ct == 1) {
-                      _height2 = (52);
-                      _ct = 0;
-                    }
-                  });
-                },
-                onLongPress: () {
-                  Navigator.of(context).pushNamed('/reward');
-                },
-                child: AnimatedContainer(
-                    width: _width,
-                    height: _height2,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(91, 134, 0, 1),
-                        borderRadius: BorderRadius.circular(20)),
-                    duration: Duration(milliseconds: 300)),
-              ),
-            ),
-            Positioned(
-                top: 25,
-                left: 20,
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.card_giftcard,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      child: Text(
-                        'Rewads Centre',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat Bold',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ]),
-          //Saved Deals
-          Stack(children: [
-            GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed('savedDeals');
-                },
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.only(top: 10),
-                  child: Container(
-                    width: _width,
-                    height: 52,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(91, 134, 0, 1),
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                )),
-            Positioned(
-                top: 25,
-                left: 20,
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.saved_search,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      child: Text(
-                        'Saved Deals',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat Bold',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.only(top: 10),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (_ct == 0) {
+                        _height2 = (52 + 50).toDouble();
+                        _height = (52);
+                        _ct++;
+                      } else if (_ct == 1) {
+                        _height2 = (52);
+                        _ct = 0;
+                      }
+                    });
+                  },
+                  onLongPress: () {
+                    Navigator.of(context).pushNamed('/reward');
+                  },
+                  child: Stack(children: [
+                    AnimatedContainer(
+                        child: Stack(children: [
+                          Positioned(
+                              top: 50,
+                              left: 50,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        '$_myPoints myPoints',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat Regular',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin:
+                                      EdgeInsets.only(top: 10, left: 60),
+                                      child: Text(
+                                        '(Press Hold)',
+                                        style: TextStyle(color: Colors.white60),
+                                      ),
+                                    )
+                                  ]))
+                        ]),
+                        width: _width,
+                        height: _height2,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.red,
+                                blurRadius: 5.0,
+                              )
+                            ],
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20)),
+                        duration: Duration(milliseconds: 300)),
+                    Positioned(
+                        top: 15,
+                        left: 20,
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.card_giftcard,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Rewads Centre',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat Bold',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ]),
                 )),
           ]),
           //Help
           Stack(children: [
             GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed('/help');
-              },
-              child: Container(
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(top: 10),
-                child: Container(
-                  width: _width,
-                  height: 52,
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(91, 134, 0, 1),
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-              ),
-            ),
-            Positioned(
-                top: 25,
-                left: 20,
-                child: Row(
+                onTap: () {
+                  // Navigator.of(context).pushNamed('help');
+                  print('help tapped');
+                },
+                child: Stack(
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.help_outline,
-                        color: Colors.white,
-                        size: 25,
+                      margin: EdgeInsets.only(top: 10),
+                      child: Container(
+                        width: _width,
+                        height: 52,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.red,
+                                blurRadius: 5.0,
+                              )
+                            ],
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      child: Text(
-                        'Help',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat Bold',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
+                    Positioned(
+                        top: 25,
+                        left: 20,
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.help_outline,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Help',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat Bold',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
                   ],
-                )),
+                ))
           ]),
-          Stack(
-            children: [
-              Positioned(
-                child: InkWell(
-                  onTap: () {
-                    _auth1.signOutGoogle();
-                    _signOut();
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ),
-                    );
-                  },
-                  child: Container(
-                    // margin: EdgeInsets.only(top: 130, right: 20),
-                    alignment: Alignment.bottomRight,
-                    child: Text(
-                      'Logout',
-                      style: TextStyle(
-                          fontFamily: 'Montserrat Bold',
-                          color: Colors.white,
-                          fontSize: 18),
+          //Logout
+          Stack(children: [
+            GestureDetector(
+                onTap: () {
+                  _auth1.signOutGoogle();
+
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginPage();
+                      },
                     ),
-                  ),
-                ),
-              )
-            ],
-          )
+                  );
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(top: 10),
+                      child: Container(
+                        width: _width,
+                        height: 52,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.red,
+                                blurRadius: 5.0,
+                              )
+                            ],
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ),
+                    Positioned(
+                        top: 25,
+                        left: 20,
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.logout,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat Bold',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ))
+          ]),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),

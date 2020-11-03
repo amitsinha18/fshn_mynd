@@ -10,11 +10,7 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-String _topBox1='';
-String _smBox1='';
 
-String _smBox2='';
-String _longBox1='';
 
 class _HomeScreenState extends State<HomeScreen> {
 
@@ -25,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         toolbarHeight: 70,
         backgroundColor: Colors.black,

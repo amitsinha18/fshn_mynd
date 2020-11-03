@@ -8,66 +8,183 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final String _proCover = 'assets/images/pro_cover_2.jpg';
+  // final String _proCover = 'assets/images/pro_cover_2.jpg';
   String _proPic = 'assets/images/pro_pic_1.jpg';
-  String _proName = 'Harry R';
+  String _proName = ('Harry R').toUpperCase();
+  String _email = 'email@address.com';
+  String _number = '921312303';
+  String _dob = '12/12/21';
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
-      body: Column(
-        children: <Widget>[
+      body: Center(
+        child: Column(children: [
+          Stack(
+            children: [
+              Container(
+                height: size.height * .3,
+                decoration: BoxDecoration(
+                  // image: DecorationImage(
+                  //     image: AssetImage(_proCover), fit: BoxFit.cover),
+                  color: Colors.white,
+                ),
+              ),
+              Center(
+                  child: InkWell(
+                      onTap: () {
+                        print('profile pic tapped');
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 160),
+                        width: 150,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(_proPic),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      )))
+            ],
+          ),
           Container(
-            child: Stack(
+              margin: EdgeInsets.only(top: 5),
+              alignment: Alignment.center,
+              child: Text(
+                _proName,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontFamily: 'Montserrat Regular',
+                    fontWeight: FontWeight.w600),
+              )),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Column(
               children: [
                 Container(
-                  width: size.width,
-                  height: 211,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(_proCover),
-                        fit: BoxFit.cover,
-                      )),
+                  width: 300,
+                  child: TextFormField(
+                    initialValue: _email,
+                    style: TextStyle(
+                        color: Color.fromRGBO(252, 252, 252, 1),
+                        fontFamily: 'Montserrat Bold'),
+                    decoration: _buildInputDecoration('', ''),
+                  ),
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: 90,
-                      height: 93,
-                      margin: EdgeInsets.only(top: 170, left: 20),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(_proPic),
-                      ),
+                Container(
+                  margin: EdgeInsets.all(20),
+                  width: 300,
+                  child: TextFormField(
+                    initialValue: _number,
+                    style: TextStyle(
+                        color: Color.fromRGBO(252, 252, 252, 1),
+                        fontFamily: 'Montserrat Bold'),
+                    decoration: _buildInputDecoration('', ''),
+                  ),
+                ),
+                Container(
+                  width: 300,
+                  child: TextFormField(
+                    initialValue: _dob,
+                    style: TextStyle(
+                        color: Color.fromRGBO(252, 252, 252, 1),
+                        fontFamily: 'Montserrat Bold'),
+                    decoration: _buildInputDecoration('', ''),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 40),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/user');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 5.0,
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 185, left: 20),
+                    child: Container(
+                      alignment: Alignment.center,
                       child: Text(
-                        _proName,
+                        'Save',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat Regular',
-                            fontWeight: FontWeight.w600),
+                            fontFamily: 'Montserrat Bold', fontSize: 18),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 195, left: 20),
-                      child: Icon(
-                        Icons.edit,
-                        color: Colors.white70,
-                        size: 20,
+                    width: 100,
+                    height: 50,
+                  ),
+                ),
+                SizedBox(width: 40),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/user');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 5.0,
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Back',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Montserrat Bold', fontSize: 18),
                       ),
-                    )
-                  ],
+                    ),
+                    width: 100,
+                    height: 50,
+                  ),
                 ),
               ],
             ),
           )
-        ],
+        ]),
       ),
       bottomNavigationBar: BottomNavBar(),
     );
   }
+}
+
+InputDecoration _buildInputDecoration(String hint, String iconPath) {
+  return InputDecoration(
+      focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(252, 252, 252, 1))),
+      hintText: hint,
+      enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(151, 151, 151, 1))),
+      hintStyle: TextStyle(color: Color.fromRGBO(252, 252, 252, 1)),
+      icon: iconPath != '' ? Image.asset(iconPath) : null,
+      errorStyle: TextStyle(color: Color.fromRGBO(248, 218, 87, 1)),
+      errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))),
+      focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))));
 }
