@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yt_tutorial_app/pages/landing_page_widgets/cat_carousel.dart';
@@ -9,8 +10,15 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
+String _topBox1='';
+String _smBox1='';
+
+String _smBox2='';
+String _longBox1='';
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
