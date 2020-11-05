@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +10,6 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
-
-
-
 
 class _LoginPageState extends State<LoginPage> {
   Future getFuture() {
@@ -28,12 +24,10 @@ class _LoginPageState extends State<LoginPage> {
         print(result);
 
         _auth1.signInWithGoogle().then((result) {
-
           if (result != null) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) {
-
                   return RegisterPage();
                 },
               ),
@@ -43,9 +37,6 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
   }
-
-
-
 
   Future<void> showProgress(BuildContext context) async {
     var result = await showDialog(
@@ -57,18 +48,18 @@ class _LoginPageState extends State<LoginPage> {
 
   String phoneNo, smssent, verificationId;
 
-  Future<void> verifyPhone() async{
-    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId){
+  Future<void> verifyPhone() async {
+    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
       this.verificationId = verId;
     };
-    final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]){
+    final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
       this.verificationId = verId;
-      smsCodeDialoge(context).then((value){
+      smsCodeDialoge(context).then((value) {
         print("Code Sent");
       });
     };
 
-    final PhoneVerificationCompleted verifiedSuccess = (AuthCredential auth){};
+    final PhoneVerificationCompleted verifiedSuccess = (AuthCredential auth) {};
     final PhoneVerificationFailed verifyFailed = (FirebaseAuthException e) {
       print('${e.message}');
     };
@@ -80,43 +71,39 @@ class _LoginPageState extends State<LoginPage> {
       codeSent: smsCodeSent,
       codeAutoRetrievalTimeout: autoRetrieve,
     );
-
   }
-  Future<bool> smsCodeDialoge(BuildContext context){
+
+  Future<bool> smsCodeDialoge(BuildContext context) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-
-
         return new AlertDialog(
           title: Text('Provide OTP'),
           content: TextField(
-            onChanged: (value)  {
-              this.smssent  = value;
+            onChanged: (value) {
+              this.smssent = value;
             },
           ),
           contentPadding: EdgeInsets.all(10.0),
           actions: <Widget>[
             new FlatButton(
-                onPressed: ()async{
+                onPressed: () async {
                   var user = FirebaseAuth.instance.currentUser;
-                  if(user != null){
+                  if (user != null) {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomeScreen()),
                     );
-
-                  }
-                  else{
+                  } else {
                     Navigator.of(context).pop();
                     signIn(smssent);
                   }
-
-
-
                 },
-                child: Text('Done', style: TextStyle( color: Colors.blue),))
+                child: Text(
+                  'Done',
+                  style: TextStyle(color: Colors.blue),
+                ))
           ],
         );
       },
@@ -128,10 +115,9 @@ class _LoginPageState extends State<LoginPage> {
       verificationId: verificationId,
       smsCode: smsCode,
     );
-    await FirebaseAuth.instance.signInWithCredential(credential)
-        .then((user){
+    await FirebaseAuth.instance.signInWithCredential(credential).then((user) {
       Navigator.of(context).pushReplacementNamed('/register');
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
     });
   }
@@ -170,23 +156,24 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Column(
                   children: <Widget>[
-                    TextField(
+                    TextFormField(
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Montserrat Regular',
+                            fontWeight: FontWeight.w600),
                         decoration: InputDecoration(
-                            labelText: 'Phone Number',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                            hintText: 'Phone Number',
+                            hintStyle: TextStyle(color: Colors.white),
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.red))),
-                        onChanged: (value){
+                        onChanged: (value) {
                           this.phoneNo = value;
-                        }
-                    ),
-
+                        }),
                     SizedBox(height: 40.0),
                     GestureDetector(
-                      onTap: () {verifyPhone();},
+                      onTap: () {
+                        verifyPhone();
+                      },
                       child: Container(
                         height: 40.0,
                         child: Material(

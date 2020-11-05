@@ -6,9 +6,10 @@ String _offRd = 'assets/images/silver_rd.png';
 String _shareCtr = '6';
 String _refferlsCtr = '12';
 String _task1 = 'Task No. One';
-String _myPoints = '120';
 String _task2 = 'Task No. Two';
 String _task3 = 'Task No. Three';
+
+String myPoints = '120';
 
 class RewardPage extends StatefulWidget {
   @override
@@ -53,7 +54,7 @@ class _RewardPageState extends State<RewardPage> {
                     children: [
                       Container(
                         child: Text(
-                          _myPoints,
+                          myPoints,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat Bold',
@@ -371,7 +372,7 @@ Widget _buildOffRd() {
     width: 26,
     height: 24,
     decoration:
-    BoxDecoration(image: DecorationImage(image: AssetImage(_offRd))),
+        BoxDecoration(image: DecorationImage(image: AssetImage(_offRd))),
   );
 }
 

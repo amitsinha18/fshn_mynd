@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
 
+String proPic = 'assets/images/pro_pic_1.jpg';
+String proName = ('Harry R').toUpperCase();
+String email = 'email@address.com';
+String number = '921312303';
+String dob = '12/12/21';
+
 class ProfilePage extends StatefulWidget {
+  // final String _proCover = 'assets/images/pro_cover_2.jpg';
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // final String _proCover = 'assets/images/pro_cover_2.jpg';
-  String _proPic = 'assets/images/pro_pic_1.jpg';
-  String _proName = ('Harry R').toUpperCase();
-  String _email = 'email@address.com';
-  String _number = '921312303';
-  String _dob = '12/12/21';
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(_proPic),
+                            image: AssetImage(proPic),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -56,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
               margin: EdgeInsets.only(top: 5),
               alignment: Alignment.center,
               child: Text(
-                _proName,
+                proName,
                 style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -70,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   width: 300,
                   child: TextFormField(
-                    initialValue: _email,
+                    initialValue: email,
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),
@@ -81,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.all(20),
                   width: 300,
                   child: TextFormField(
-                    initialValue: _number,
+                    initialValue: number,
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),
@@ -91,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   width: 300,
                   child: TextFormField(
-                    initialValue: _dob,
+                    initialValue: dob,
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),

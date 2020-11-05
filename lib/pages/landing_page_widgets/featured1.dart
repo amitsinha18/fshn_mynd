@@ -22,18 +22,23 @@ class _FeatBannerState extends State<FeatBanner> {
   List<Widget> imageSlider = imgList.map((imgUrl) {
     return Builder(
       builder: (BuildContext context) {
-        return Container(
-          width: 264,
-          margin: EdgeInsets.symmetric(horizontal: 10.0),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(imgUrl),
-              fit: BoxFit.fill,
-            ),
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.green,
-          ),
-        );
+        return InkWell(
+            onTap: () {
+              // FadeTransition(opacity: , child: ());
+              Navigator.of(context).pushNamed('/offerpage');
+            },
+            child: Container(
+              width: 264,
+              margin: EdgeInsets.symmetric(horizontal: 10.0),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(imgUrl),
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.green,
+              ),
+            ));
       },
     );
   }).toList();

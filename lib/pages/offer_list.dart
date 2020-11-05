@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
+import 'package:yt_tutorial_app/pages/landing_page_widgets/offers_c.dart';
 
 class OfferList extends StatefulWidget {
   @override
@@ -57,97 +58,101 @@ class _OfferListState extends State<OfferList>
                     unselectedLabelColor: Colors.white.withOpacity(0.3),
                     tabs: [
                       Tab(
-                        child: Text('Saloon'),
-                      ),
-                      Tab(
-                        child: Text('Boutique'),
-                      ),
-                      Tab(
                         child: Text('Fashion'),
                       ),
                       Tab(
-                        child: Text('Accesories'),
+                        child: Text('Beauty'),
+                      ),
+                      Tab(
+                        child: Text('Lifestyle'),
+                      ),
+                      Tab(
+                        child: Text('More'),
                       ),
                     ]),
                 preferredSize: Size.fromHeight(30.0)),
           ),
-          body: Center(
-            child: ListView(
-              children: <Widget>[
-                //Category Box Design Start!!!
-                Column(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Column(
-                        children: [
-                          //Image Container
-                          Container(
-                            width: 270,
-                            height: 214,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12)),
-                                image: DecorationImage(
-                                    image: AssetImage('assets/images/cimg.jpg'),
-                                    fit: BoxFit.fill)),
-                          ),
-                          //Bottom_white Box
-                          Container(
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: IconButton(
-                                    icon: Icon(Icons.add_box),
-                                    color: Colors.black,
-                                    iconSize: 35,
-                                    tooltip: 'Book Offer',
-                                    onPressed: () {
-                                      print('Book Pressed');
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 57, top: 15),
-                                  child: Column(
-                                    children: [Text('data'), Text('data')],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 55),
-                                  child: IconButton(
-                                    icon: Icon(Icons.share),
-                                    color: Colors.black,
-                                    iconSize: 35,
-                                    tooltip: 'Book Offer',
-                                    onPressed: () {
-                                      print('Share Pressed');
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            height: 62,
-                            width: 270,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5.0,
-                                  ),
-                                ]),
-                          )
-                        ],
+          body: Container(
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * .25,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Gift Cards',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Bold',
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
                       ),
-                    )
-                  ],
-                ) //Category Box Design End
+                      Container(
+                        // color: Colors.blue,
+                        width: MediaQuery.of(context).size.width,
+                        child: OfferC(),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * .25,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Vouchers',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Bold',
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        // color: Colors.blue,
+                        width: MediaQuery.of(context).size.width,
+                        child: OfferC(),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * .25,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Deals',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Bold',
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        // color: Colors.blue,
+                        width: MediaQuery.of(context).size.width,
+                        child: OfferC(),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),

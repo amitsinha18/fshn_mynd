@@ -1,20 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yt_tutorial_app/pages/home_screen.dart';
 
-String _topBox1='';
-String _smBox1='';
+String _topBox1 = '';
+String _smBox1 = '';
+Uri _topBox;
 
-String _smBox2='';
-String _longBox1='';
-String _topBox2 = 'assets/images/157x240_1.png';
+String _smBox2 = '';
+String _longBox1 = '';
+String _topBox2 = 'assets/images/153x115_2.png';
 String _topBox3 = 'assets/images/153x115_1.png';
-
 
 String _longBox2 = 'assets/images/157x240_2.png';
 String _longBox3 = 'assets/images/157x240_3.png';
-
 
 String _smBox3 = 'assets/images/153x115_3.png';
 String _smBox4 = 'assets/images/153x115_4.png';
@@ -31,26 +29,46 @@ class _DashState extends State<PatternBox1> {
   void initState() {
     super.initState();
 
-    FirebaseFirestore.instance.collection("crol").doc('crol1').get().then((
-        value) {
+    FirebaseFirestore.instance
+        .collection("crol")
+        .doc('crol1')
+        .get()
+        .then((value) {
       _topBox1 = value.data()['image'];
     });
-    FirebaseFirestore.instance.collection("crol").doc('crol2').get().then((
-        value) async {
+    FirebaseFirestore.instance
+        .collection("crol")
+        .doc('crol1')
+        .get()
+        .then((value) {
+      _topBox = value.data()['image'];
+    });
+    FirebaseFirestore.instance
+        .collection("crol")
+        .doc('crol2')
+        .get()
+        .then((value) async {
       _longBox1 = await value.data()['image'];
     });
-    FirebaseFirestore.instance.collection("crol").doc('crol3').get().then((
-        value) async {
+    FirebaseFirestore.instance
+        .collection("crol")
+        .doc('crol3')
+        .get()
+        .then((value) async {
       _smBox1 = await value.data()['image'];
     });
-    FirebaseFirestore.instance.collection("crol").doc('crol4').get().then((
-        value) async {
+    FirebaseFirestore.instance
+        .collection("crol")
+        .doc('crol4')
+        .get()
+        .then((value) async {
       _smBox2 = await value.data()['image'];
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('_topBox');
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.all(20),
@@ -61,25 +79,32 @@ class _DashState extends State<PatternBox1> {
           Container(
             child: Image.network(
               _topBox1,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
+              color: Colors.white,
             ),
             margin: EdgeInsets.only(bottom: 10),
             width: 326,
             height: 150,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 margin: EdgeInsets.only(),
+                child: Image.network(
+                  _longBox1,
+                  fit: BoxFit.fill,
+                ),
                 width: 157,
                 height: 240,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    image: DecorationImage(
-                        image: AssetImage(_longBox1), fit: BoxFit.fill)),
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.white,
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(left: 10),
@@ -87,21 +112,27 @@ class _DashState extends State<PatternBox1> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(bottom: 5),
+                      child: Image.network(
+                        _smBox1,
+                        fit: BoxFit.fill,
+                      ),
                       width: 153,
                       height: 115,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          image: DecorationImage(
-                              image: AssetImage(_smBox1), fit: BoxFit.fill)),
+                          color: Colors.white),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 5),
+                      child: Image.network(
+                        _smBox2,
+                        fit: BoxFit.fill,
+                      ),
                       width: 153,
                       height: 115,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          image: DecorationImage(
-                              image: AssetImage(_smBox2), fit: BoxFit.cover)),
+                          color: Colors.white),
                     )
                   ],
                 ),
@@ -134,6 +165,8 @@ class PatternBox2 extends StatelessWidget {
             height: 150,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 margin: EdgeInsets.only(),
@@ -197,6 +230,8 @@ class PatternBox3 extends StatelessWidget {
             height: 150,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 margin: EdgeInsets.only(),
@@ -239,11 +274,6 @@ class PatternBox3 extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
 
 // class PatternBox1 extends StatefulWidget {
 //   @override
@@ -332,4 +362,3 @@ class PatternBox3 extends StatelessWidget {
 // //     );
 // //   }
 // // }
-

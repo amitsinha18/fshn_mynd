@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(6), topRight: Radius.circular(6)),
+        color: Colors.black,
+      ),
       height: 60,
-      color: Colors.black,
+      width: 320,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

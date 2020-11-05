@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 import 'package:yt_tutorial_app/pages/user.dart';
 import 'pages/user.dart';
 import 'pages/login.dart';
@@ -13,7 +12,7 @@ import 'pages/wall.dart';
 import 'pages/profile.dart';
 import 'pages/register.dart';
 import 'pages/reward_page.dart';
-
+import 'pages/offer_page.dart';
 
 void main() async {
   // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -23,16 +22,11 @@ void main() async {
   if (FirebaseAuth.instance.currentUser != null) {
     runApp(Home());
   } else {
-
     runApp(MyApp());
   }
-
 }
 
-
 class MyApp extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,11 +41,11 @@ class MyApp extends StatelessWidget {
         '/register': (BuildContext context) => new RegisterPage(),
         '/reward': (BuildContext context) => new RewardPage()
       },
-
       home: LoginPage(),
     );
   }
 }
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -65,12 +59,10 @@ class Home extends StatelessWidget {
         '/profile': (BuildContext context) => new ProfilePage(),
         '/home': (BuildContext context) => new HomeScreen(),
         '/register': (BuildContext context) => new RegisterPage(),
-        '/reward': (BuildContext context) => new RewardPage()
-
+        '/reward': (BuildContext context) => new RewardPage(),
+        '/offerpage': (BuildContext context) => new OfferPage()
       },
-      home: HomeScreen(),
+      home: OfferList(),
     );
   }
 }
-
-
