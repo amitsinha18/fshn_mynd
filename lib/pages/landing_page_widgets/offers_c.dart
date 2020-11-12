@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 List<String> imgList = [
-  'assets/images/174x93_1.png',
-  'assets/images/174x93_2.png',
-  'assets/images/174x93_3.png',
-  'assets/images/174x93_4.png',
-  'assets/images/174x93_5.png',
-  'assets/images/174x93_6.png'
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg'
 ];
 
 class OfferC extends StatefulWidget {
@@ -45,6 +45,7 @@ class _OfferCState extends State<OfferC> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +53,7 @@ class _OfferCState extends State<OfferC> {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              height: 143,
+              height: size.height * .18,
               initialPage: 0,
               enlargeCenterPage: true,
               onPageChanged: (index, current) {

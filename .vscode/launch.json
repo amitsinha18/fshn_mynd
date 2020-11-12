@@ -1,0 +1,13 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

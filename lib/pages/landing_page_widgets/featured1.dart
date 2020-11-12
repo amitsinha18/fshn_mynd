@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 List<String> imgList = [
-  'assets/images/174x93_1.png',
-  'assets/images/174x93_2.png',
-  'assets/images/174x93_3.png',
-  'assets/images/174x93_4.png',
-  'assets/images/174x93_5.png',
-  'assets/images/174x93_6.png'
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg'
 ];
 
 class FeatBanner extends StatefulWidget {
@@ -22,13 +22,14 @@ class _FeatBannerState extends State<FeatBanner> {
   List<Widget> imageSlider = imgList.map((imgUrl) {
     return Builder(
       builder: (BuildContext context) {
+        var size = MediaQuery.of(context).size;
         return InkWell(
             onTap: () {
               // FadeTransition(opacity: , child: ());
               Navigator.of(context).pushNamed('/offerpage');
             },
             child: Container(
-              width: 264,
+              width: size.width * .9,
               margin: EdgeInsets.symmetric(horizontal: 10.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -45,6 +46,7 @@ class _FeatBannerState extends State<FeatBanner> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +54,7 @@ class _FeatBannerState extends State<FeatBanner> {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              height: 143,
+              height: size.height * .2,
               initialPage: 0,
               autoPlay: true,
               enlargeCenterPage: true,

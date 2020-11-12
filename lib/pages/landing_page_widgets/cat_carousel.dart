@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 final List<String> imgList = [
-  'assets/images/80x80_1.jpg',
-  'assets/images/80x80_2.jpg',
-  'assets/images/80x80_3.jpg',
-  'assets/images/80x80_4.jpg'
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg',
+  'assets/images/placeholder.jpg'
 ];
 
 class CatBanner extends StatefulWidget {
@@ -18,43 +22,43 @@ class _CatBannerState extends State<CatBanner> {
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = imgList
         .map((item) => Row(
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed('/offer');
-          },
-          child: Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(item),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/offer');
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(item),
+                          fit: BoxFit.fill,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5.0,
+                          ),
+                        ]),
                   ),
-                ]),
-          ),
-        ),
-      ],
-    ))
+                ),
+              ],
+            ))
         .toList();
     return Container(
         child: Column(
-          children: <Widget>[
-            CarouselSlider(
-              options: CarouselOptions(
-                disableCenter: true,
-                viewportFraction: .3,
-                height: 80,
-              ),
-              items: imageSliders,
-            ),
-          ],
-        ));
+      children: <Widget>[
+        CarouselSlider(
+          options: CarouselOptions(
+            disableCenter: true,
+            viewportFraction: .3,
+            height: 80,
+          ),
+          items: imageSliders,
+        ),
+      ],
+    ));
   }
 }

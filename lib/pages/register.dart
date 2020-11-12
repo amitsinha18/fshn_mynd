@@ -1,134 +1,252 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yt_tutorial_app/services/auth.dart';
 
-final _formKey = new GlobalKey<FormState>();
 class RegisterPage extends StatefulWidget {
   @override
-  _DashState createState() => _DashState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _DashState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _name1 = new TextEditingController();
+  final TextEditingController _email1 = new TextEditingController();
+  final TextEditingController _number1 = new TextEditingController();
+
   final Auth _auth1 = Auth();
-  TextEditingController uName,uEmail;
-  String uid='',uname1;
-
-
   String name = '';
   String email = '';
-  String photoUrl ='';
+  String number = '';
+  String uid = '';
   @override
-  void initState(){
-
-
-    _auth1.getCurrentUID().then((val){
+  void initState() {
+    _auth1.getCurrentUID().then((val) {
       setState(() {
-        this.uid = val.uid;
-        this.name = val.displayName;
-        this.email = val.email;
-        this.photoUrl=val.photoURL;
-
-
+        name = val.displayName;
+        uid = val.uid;
+        email = val.email;
+        number = val.phoneNumber;
+        _email1.text = email;
+        _name1.text = name;
+        _number1.text = number;
       });
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
     });
     super.initState();
-    uid.toString();
-
+    print(name);
   }
 
+  DateTime selectedDate = DateTime.now();
 
-  @override
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1960, 1),
+        lastDate: selectedDate);
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   Widget build(BuildContext context) {
-       uName = TextEditingController(text: '$name');
-
-       uEmail = TextEditingController(text: '$email');
-
-
-
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          color: Colors.black,
-          padding: const EdgeInsets.symmetric(horizontal: 43.0),
-          child: Form(
-            key: _formKey,
-            child: Container(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildFirstName(uName),
-                  _buildEmail(uEmail),
-                  _buildDOB(),
-                  _buildSignUpButton(context,uid)
-                ],
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        width: size.width,
+        height: size.height,
+        color: Colors.black,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Header
+            Container(
+              margin: EdgeInsets.only(top: 60),
+              width: size.width,
+              // color: Colors.blue,
+              child: Text(
+                'Sign-Up',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontFamily: 'Montserrat Bold'),
+                textAlign: TextAlign.center,
               ),
             ),
-          ),
-        ));
+            SizedBox(
+              height: 100,
+            ),
+            Container(
+              width: size.width,
+              height: size.height - 200,
+              // color: Colors.blue,
+              child: Column(
+                children: [
+                  //Name
+                  Container(
+                    width: size.width * .9,
+                    child: TextFormField(
+                      controller: _name1,
+                      validator: (value) =>
+                          value.isEmpty ? "First name cannot be empty" : null,
+                      onChanged: (value) {
+                        name = value;
+                      },
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Montserrat Bold'),
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(151, 151, 151, 1),
+                            ),
+                          ),
+                          hintText: 'Name',
+                          hintStyle: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  //Number
+                  Container(
+                    width: size.width * .9,
+                    child: TextFormField(
+                      controller: _number1,
+                      onChanged: (value) {
+                        number = value;
+                      },
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Montserrat Bold'),
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(151, 151, 151, 1),
+                            ),
+                          ),
+                          hintText: 'Number',
+                          hintStyle: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  //Email
+                  Container(
+                    width: size.width * .9,
+                    child: TextFormField(
+                      controller: _email1,
+                      validator: (value) => !isEmail(value)
+                          ? "Sorry, we do not recognize this email address"
+                          : null,
+                      onChanged: (value) {
+                        email = value;
+                      },
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Montserrat Bold'),
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(151, 151, 151, 1),
+                            ),
+                          ),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  //DOB
+                  Container(
+                    width: size.width * .9,
+                    child: TextFormField(
+                      readOnly: true,
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Montserrat Bold'),
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(151, 151, 151, 1),
+                            ),
+                          ),
+                          hintText: ("${selectedDate.toLocal()}".split(' ')[0]),
+                          hintStyle: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  SizedBox(height: 80),
+                  //Sign-up Button
+                  GestureDetector(
+                    onTap: () {
+                      FirebaseFirestore.instance
+                          .collection("clients")
+                          .doc(uid)
+                          .update({
+                        "name": name,
+                        "email": email,
+                        "dob": ("${selectedDate.toLocal()}".split(' ')[0]),
+                        "number": number,
+                      }).then((_) {
+                        print("success!");
+                        Navigator.of(context).pushReplacementNamed('/home');
+                      });
+                    },
+                    child: Container(
+                      width: size.width * .8,
+                      height: 40.0,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.redAccent,
+                        color: Colors.red,
+                        elevation: 7.0,
+                        child: Center(
+                          child: Text(
+                            'Sign-Up',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat'),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
-InputDecoration _buildInputDecoration(String hint, String iconPath) {
-  return InputDecoration(
-      focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(252, 252, 252, 1))),
-      hintText: hint,
-      enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(151, 151, 151, 1))),
-      hintStyle: TextStyle(color: Color.fromRGBO(252, 252, 252, 1)),
-      icon: iconPath != '' ? Image.asset(iconPath) : null,
-      errorStyle: TextStyle(color: Color.fromRGBO(248, 218, 87, 1)),
-      errorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))),
-      focusedErrorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(248, 218, 87, 1))));
-}
-String name;
-Widget _buildFirstName(controller) {
-
-  return TextFormField(
-    controller: controller,
-
-    validator: (value) => value.isEmpty ? "First name cannot be empty" : null,
- onChanged: (value){
-      name=value;
- },
-
-
-    style: TextStyle(
-        color: Color.fromRGBO(252, 252, 252, 1), fontFamily: 'RadikalLight'),
-    decoration: _buildInputDecoration("First name", ''),
-  );
-}
-
-
-
-Widget _buildEmail(controller) {
-  return TextFormField(
-    controller: controller,
-    validator: (value) => !isEmail(value)
-        ? "Sorry, we do not recognize this email address"
-        : null,
-    style: TextStyle(
-        color: Color.fromRGBO(252, 252, 252, 1), fontFamily: 'RadikalLight'),
-    decoration: _buildInputDecoration("Email", ''),
-  );
-}
-
-Widget _buildDOB() {
-  return TextFormField(
-    style: TextStyle(
-        color: Color.fromRGBO(252, 252, 252, 1), fontFamily: 'RadikalLight'),
-    decoration: _buildInputDecoration("DOB", ''),
-
-  );
-}
-
+//         // if (name != null) {
+//         //   FirebaseFirestore.instance.collection("clients").doc(uid).update({
+//         //     "name": name,
+//         //   }).then((_) {
+//         //     print("success!");
+//         //   });
+//         // } else {
+//         //   FirebaseFirestore.instance
+//         //       .collection("clients")
+//         //       .doc(uid)
+//         //       .update({}).then((_) {
+//         //     print("success!");
+//         //   });
+//         // }
+//
 bool isEmail(String value) {
   String regex =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -137,45 +255,3 @@ bool isEmail(String value) {
 
   return value.isNotEmpty && regExp.hasMatch(value);
 }
-
-Widget _buildSignUpButton(BuildContext context,String uid) {
-  return Container(
-    margin: const EdgeInsets.only(top: 43.0),
-    width: MediaQuery.of(context).size.width * 0.62,
-    child: RaisedButton(
-      child: const Text(
-        "Sign Up",
-        style: TextStyle(
-            color: Colors.white, fontFamily: 'RadikalMedium', fontSize: 14),
-      ),
-      color: Colors.red,
-      elevation: 4.0,
-      onPressed: () {
-        if(name != null) {
-          FirebaseFirestore.instance.collection("clients").doc(uid).update(
-              {
-
-                "name": name,
-
-
-              }).then((_) {
-            print("success!");
-          });
-        }else{
-          FirebaseFirestore.instance.collection("clients").doc(uid).update(
-              {
-
-
-
-
-              }).then((_) {
-            print("success!");
-          });
-        }
-      },
-    ),
-  );
-}
-
-
-

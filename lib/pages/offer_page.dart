@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String offerImg = 'assets/images/cimg.jpg';
+String offerImg = 'assets/images/placeholder.jpg';
 String offerTitle = 'offer title'.toUpperCase();
 String offerDesc =
     'This is because the app tries to get renderUrl asynchronously. Before the render Url is fetched back, it is null.NetworkImage(renderUrl ?? '
@@ -20,7 +20,7 @@ class OfferPage extends StatelessWidget {
               Container(
                 child: InkWell(
                   onTap: () {
-                    print('Close Tapped');
+                    Navigator.of(context).pop();
                   },
                   child: Container(
                     alignment: Alignment.topRight,

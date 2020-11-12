@@ -41,8 +41,8 @@
 30        android:debuggable="true"
 31        android:icon="@mipmap/ic_launcher"
 31-->C:\Users\User\AndroidStudioProjects\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\android\app\src\main\AndroidManifest.xml:11:9-43
-32        android:label="yt_tutorial_app" >
-32-->C:\Users\User\AndroidStudioProjects\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\android\app\src\main\AndroidManifest.xml:10:9-40
+32        android:label="MYND" >
+32-->C:\Users\User\AndroidStudioProjects\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\android\app\src\main\AndroidManifest.xml:10:9-29
 33        <activity
 33-->C:\Users\User\AndroidStudioProjects\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\android\app\src\main\AndroidManifest.xml:12:9-40:20
 34            android:name="com.example.yt_tutorial_app.MainActivity"

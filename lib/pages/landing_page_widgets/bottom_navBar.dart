@@ -51,7 +51,7 @@ class BottomNavBar extends StatelessWidget {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/wall');
+                        Navigator.of(context).pushReplacementNamed('/wall');
                       },
                       child: Container(
                         child: Icon(

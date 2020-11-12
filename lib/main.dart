@@ -62,7 +62,7 @@ class Home extends StatelessWidget {
         '/reward': (BuildContext context) => new RewardPage(),
         '/offerpage': (BuildContext context) => new OfferPage()
       },
-      home: OfferList(),
+      home: HomeScreen(),
     );
   }
 }

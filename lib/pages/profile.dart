@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:yt_tutorial_app/services/auth.dart';
 
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
 
-String proPic = 'assets/images/pro_pic_1.jpg';
-String proName = ('Harry R').toUpperCase();
-String email = 'email@address.com';
+// String proPic = 'assets/images/pro_pic_1.jpg';
+// String proName = ('Harry R').toUpperCase();
+// String email = 'email@address.com';
 String number = '921312303';
 String dob = '12/12/21';
 
@@ -16,7 +18,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final TextEditingController _email1 = new TextEditingController();
+  final Auth _auth1 = Auth();
+  String proName = '';
+  String email = '';
+  String proPic = '';
   @override
+  void initState() {
+    _auth1.getCurrentUID().then((val) {
+      setState(() {
+        proName = val.displayName;
+        email = val.email;
+        proPic = val.photoURL;
+        _email1.text = email;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -44,9 +65,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 150,
                         height: 120,
                         decoration: BoxDecoration(
+                          color: Colors.green,
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(proPic),
+                            image: NetworkImage(proPic),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -71,7 +93,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   width: 300,
                   child: TextFormField(
-                    initialValue: email,
+                    controller: _email1,
+                    onChanged: (value) {
+                      email = value;
+                    },
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),
