@@ -1,38 +1,38 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 class Auth {
-   
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //sign in amon
-   Future signInAnnon() async{
-     try{
+  Future signInAnnon() async {
+    try {
+      UserCredential userCredential = await _auth.signInAnonymously();
+      User user = userCredential.user;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
-       UserCredential userCredential= await _auth.signInAnonymously();
-       User user = userCredential.user;
-       return user;
-     }catch(e){
-       print(e.toString());
-       return null;
-     }
-   }
   //sigin in google method
   Future<String> signInWithGoogle() async {
     await Firebase.initializeApp();
 
-    final GoogleSignInAccount googleSignInAccount = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+    final GoogleSignInAccount googleSignInAccount =
+        await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
 
-    final UserCredential authResult = await _auth.signInWithCredential(credential);
+    final UserCredential authResult =
+        await _auth.signInWithCredential(credential);
     final User user = authResult.user;
 
     if (user != null) {
@@ -43,19 +43,6 @@ class Auth {
       assert(user.uid == currentUser.uid);
 
       print('signInWithGoogle succeeded: $user');
-      FirebaseFirestore.instance.collection("clients").doc(currentUser.uid).set(
-          {
-            "name" : currentUser.displayName,
-            "email" : currentUser.email,
-            "photo" : currentUser.photoURL,
-            "id" : currentUser.uid,
-            // "address" : {
-            //   "street" : "street 24",
-            //   "city" : "new york",
-            // }
-          }).then((_){
-        print("success!");
-      });
 
       return '$user';
     }
@@ -70,8 +57,7 @@ class Auth {
   }
   //register to firestore
 
-
-  Future<User> getCurrentUID() async{
+  Future<User> getCurrentUID() async {
     final User _auth1 = FirebaseAuth.instance.currentUser;
     final String uid = _auth1.uid;
 
@@ -82,6 +68,4 @@ class Auth {
 
   //signout
 
-
 }
-

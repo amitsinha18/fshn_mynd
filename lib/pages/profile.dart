@@ -1,14 +1,18 @@
+import 'dart:io';
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:yt_tutorial_app/services/auth.dart';
-
+import 'package:flushbar/flushbar.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 // String proPic = 'assets/images/pro_pic_1.jpg';
 // String proName = ('Harry R').toUpperCase();
 // String email = 'email@address.com';
-String number = '921312303';
-String dob = '12/12/21';
+String number = '';
+String dob = '';
 
 class ProfilePage extends StatefulWidget {
   // final String _proCover = 'assets/images/pro_cover_2.jpg';
@@ -19,18 +23,36 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _email1 = new TextEditingController();
+  final TextEditingController _name1 = new TextEditingController();
+  final TextEditingController _dob1 = new TextEditingController();
+  final TextEditingController _number1 = new TextEditingController();
   final Auth _auth1 = Auth();
   String proName = '';
   String email = '';
   String proPic = '';
-  @override
+  String _uid = "";
+  final picker = ImagePicker();
+  File _image;
   void initState() {
     _auth1.getCurrentUID().then((val) {
-      setState(() {
-        proName = val.displayName;
-        email = val.email;
-        proPic = val.photoURL;
-        _email1.text = email;
+      _uid = val.uid;
+
+      FirebaseFirestore.instance
+          .collection("clients")
+          .doc(_uid)
+          .get()
+          .then((value) async {
+        setState(() {
+          proName = value.data()['name'];
+          email = value.data()['email'];
+          number = value.data()['number'];
+          dob = value.data()['dob'];
+          proPic = value.data()['photo'];
+          _email1.text = email;
+          _name1.text = proName;
+          _number1.text = number;
+          _dob1.text = dob;
+        });
       });
     }).catchError((e) {
       print(e);
@@ -38,11 +60,57 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1960, 1),
+        lastDate: selectedDate);
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        proPic = _image.toString();
+        uploadimage();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadimage() async {
+    String filename = basename(_image.path);
+    Reference reference =
+        FirebaseStorage.instance.ref().child('user').child(filename);
+    String fileUrl =
+        await (await reference.putFile(_image).whenComplete(() => null))
+            .ref
+            .getDownloadURL();
+    print(fileUrl);
+    if (fileUrl != null) {
+      proPic = fileUrl;
+      FirebaseFirestore.instance.collection("clients").doc(_uid).update({
+        "photo": proPic,
+      });
+    }
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(15, 16, 17, 1),
       body: Center(
         child: Column(children: [
           Stack(
@@ -56,23 +124,36 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Center(
-                  child: InkWell(
-                      onTap: () {
-                        print('profile pic tapped');
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top: 160),
-                        width: 150,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(proPic),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      )))
+                child: InkWell(
+                  onTap: () {
+                    getImage();
+                  },
+                  child: Container(
+                    child: CircleAvatar(
+                        radius: 55,
+                        backgroundColor: Colors.red,
+                        child: ClipOval(
+                          child: SizedBox(
+                              width: 180,
+                              height: 180,
+                              child: (_image != null)
+                                  ? Image.file(
+                                      _image,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.network(
+                                      proPic,
+                                      fit: BoxFit.fill,
+                                    )),
+                        )),
+                    margin: EdgeInsets.only(top: 160),
+                    // decoration: BoxDecoration(
+                    //   color: Colors.green,
+                    //   shape: BoxShape.circle,
+                    // ),
+                  ),
+                ),
+              )
             ],
           ),
           Container(
@@ -107,7 +188,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.all(20),
                   width: 300,
                   child: TextFormField(
-                    initialValue: number,
+                    controller: _number1,
+                    onChanged: (value) {
+                      number = value;
+                    },
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),
@@ -117,7 +201,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   width: 300,
                   child: TextFormField(
-                    initialValue: dob,
+                    readOnly: true,
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    controller: _dob1,
+                    onChanged: (value) {
+                      dob = value;
+                    },
                     style: TextStyle(
                         color: Color.fromRGBO(252, 252, 252, 1),
                         fontFamily: 'Montserrat Bold'),
@@ -128,68 +219,51 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/user');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 5.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Save',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Bold', fontSize: 18),
-                      ),
-                    ),
-                    width: 100,
-                    height: 50,
+            margin: EdgeInsets.only(top: 50),
+            child: InkWell(
+              onTap: () {
+                FirebaseFirestore.instance
+                    .collection("clients")
+                    .doc(_uid)
+                    .update({
+                  "name": proName,
+                  "email": email,
+                  "dob": ("${selectedDate.toLocal()}".split(' ')[0]),
+                  "number": number,
+                }).then((_) {
+                  print("success!");
+                  Navigator.of(context).pushReplacementNamed('/user');
+                  Flushbar(
+                    message: "Profile Updated!",
+                    duration: Duration(seconds: 3),
+                  )..show(context);
+                });
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.red,
+                      blurRadius: 5.0,
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.red,
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Done',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat Bold',
+                        fontSize: 18,
+                        color: Colors.white),
                   ),
                 ),
-                SizedBox(width: 40),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/user');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 5.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Back',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Bold', fontSize: 18),
-                      ),
-                    ),
-                    width: 100,
-                    height: 50,
-                  ),
-                ),
-              ],
+                width: 100,
+                height: 40,
+              ),
             ),
           )
         ]),

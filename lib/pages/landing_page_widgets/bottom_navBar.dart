@@ -6,31 +6,29 @@ class BottomNavBar extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-        color: Colors.black,
+        color: Color.fromRGBO(15, 16, 17, 1),
       ),
       height: 60,
-      width: 320,
+      width: size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 70),
-            child: Stack(
-              children: <Widget>[
-                Column(
+          //Home
+          InkWell(
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/home');
+              },
+              child: Container(
+                width: size.width / 3,
+                alignment: Alignment.center,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/home');
-                      },
-                      child: Container(
-                        child: Icon(
-                          Icons.home,
-                          color: Colors.white,
-                        ),
+                    Container(
+                      child: Icon(
+                        Icons.home,
+                        color: Colors.white,
                       ),
                     ),
                     Text(
@@ -39,25 +37,23 @@ class BottomNavBar extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            child: Stack(
-              children: <Widget>[
-                Column(
+                ),
+              )),
+          //Wall
+          InkWell(
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/wall');
+              },
+              child: Container(
+                width: size.width / 3,
+                alignment: Alignment.center,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushReplacementNamed('/wall');
-                      },
-                      child: Container(
-                        child: Icon(
-                          Icons.wallpaper,
-                          color: Colors.white,
-                        ),
+                    Container(
+                      child: Icon(
+                        Icons.wallpaper,
+                        color: Colors.white,
                       ),
                     ),
                     Text(
@@ -66,26 +62,23 @@ class BottomNavBar extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 70),
-            child: Stack(
-              children: <Widget>[
-                Column(
+                ),
+              )),
+          //User
+          InkWell(
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/user');
+              },
+              child: Container(
+                width: size.width / 3,
+                alignment: Alignment.center,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/user');
-                      },
-                      child: Container(
-                        child: Icon(
-                          Icons.face,
-                          color: Colors.white,
-                        ),
+                    Container(
+                      child: Icon(
+                        Icons.face,
+                        color: Colors.white,
                       ),
                     ),
                     Text(
@@ -94,10 +87,8 @@ class BottomNavBar extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     )
                   ],
-                )
-              ],
-            ),
-          ),
+                ),
+              )),
         ],
       ),
     );

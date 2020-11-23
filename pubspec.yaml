@@ -33,8 +33,19 @@ dependencies:
   firebase_core: ^0.5.0+1
   google_sign_in: ^4.5.5
   future_progress_dialog: ^0.1.1
+  flushbar: ^1.10.4
+  image_picker: ^0.6.7+14
+  firebase_storage: ^5.0.1
+  esys_flutter_share: ^1.0.2
+  
+  #url 
+  url_launcher: ^5.7.10
 
+  #Whatsapp Launcher
+  flutter_open_whatsapp: ^0.1.2
 
+  #Image Loader
+  transparent_image: ^1.0.0
 
   #Carousal Slider
   carousel_slider: ^2.3.1
@@ -45,6 +56,8 @@ dependencies:
   #Bottom NavBar
   persistent_bottom_nav_bar: ^2.1.0
 
+  #TinderCard
+  flutter_tindercard: ^0.1.7
 
 
 dev_dependencies:
@@ -70,6 +83,24 @@ flutter:
   assets:
     - assets/images/placeholder.jpg
     - assets/images/pro_pic_1.jpg
+    - assets/images/wall1.jpg
+    - assets/images/wall2.jpg
+    - assets/images/wall3.jpg
+    - assets/images/wall4.jpg
+    - assets/images/wall5.jpg
+    - assets/images/wall6.png
+    - assets/images/wall7.png
+    - assets/images/slider1.png
+    - assets/images/slider2.png
+    - assets/images/slider4.png
+    - assets/images/slider5.png
+    - assets/images/cat1.png
+    - assets/images/cat2.png
+    - assets/images/giftBox.png
+    
+    
+
+    
 
 
 
@@ -95,7 +126,32 @@ flutter:
     
     - family: Montserrat Bold  
       fonts:
-        - asset: assets/fonts/mt_b.ttf    
+        - asset: assets/fonts/mt_b.ttf
+    
+    - family: Roboto  
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+    
+    - family: Roboto Italic  
+      fonts:
+        - asset: assets/fonts/Roboto-Italic.ttf 
+        
+    - family: Roboto Thin  
+      fonts:
+        - asset: assets/fonts/Roboto-Thin.ttf 
+
+    - family: Roboto Light
+      fonts:
+        - asset: assets/fonts/Roboto-Light.ttf         
+        
+    - family: Roboto Medium 
+      fonts:
+        - asset: assets/fonts/Roboto-Medium.ttf 
+        
+    - family: Roboto Bold
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf 
+        
         
   #   - family: Trajan Pro
   #     fonts:

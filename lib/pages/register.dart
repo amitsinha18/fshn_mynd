@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yt_tutorial_app/services/auth.dart';
+import 'package:flushbar/flushbar.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -18,6 +19,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String email = '';
   String number = '';
   String uid = '';
+  String photo = '';
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _auth1.getCurrentUID().then((val) {
@@ -26,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
         uid = val.uid;
         email = val.email;
         number = val.phoneNumber;
+        photo = val.photoURL;
         _email1.text = email;
         _name1.text = name;
         _number1.text = number;
@@ -59,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         width: size.width,
         height: size.height,
-        color: Colors.black,
+        color: Color.fromRGBO(15, 16, 17, 1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,8 +96,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: size.width * .9,
                     child: TextFormField(
                       controller: _name1,
-                      validator: (value) =>
-                          value.isEmpty ? "First name cannot be empty" : null,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter your name';
+                        }
+                        return null;
+                      },
                       onChanged: (value) {
                         name = value;
                       },
@@ -109,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           hintText: 'Name',
-                          hintStyle: TextStyle(color: Colors.white)),
+                          hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
                   //Number
@@ -131,8 +139,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Color.fromRGBO(151, 151, 151, 1),
                             ),
                           ),
-                          hintText: 'Number',
-                          hintStyle: TextStyle(color: Colors.white)),
+                          hintText: 'Phone Number',
+                          hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
                   //Email
@@ -158,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           hintText: 'Email',
-                          hintStyle: TextStyle(color: Colors.white)),
+                          hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
                   //DOB
@@ -181,25 +189,42 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           hintText: ("${selectedDate.toLocal()}".split(' ')[0]),
-                          hintStyle: TextStyle(color: Colors.white)),
+                          hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
                   SizedBox(height: 80),
                   //Sign-up Button
                   GestureDetector(
                     onTap: () {
-                      FirebaseFirestore.instance
-                          .collection("clients")
-                          .doc(uid)
-                          .update({
-                        "name": name,
-                        "email": email,
-                        "dob": ("${selectedDate.toLocal()}".split(' ')[0]),
-                        "number": number,
-                      }).then((_) {
-                        print("success!");
-                        Navigator.of(context).pushReplacementNamed('/home');
-                      });
+                      if (name == null || email == null || number == null) {
+                        Flushbar(
+                          message: "Please Complete Registeration",
+                          duration: Duration(seconds: 3),
+                        )..show(context);
+                      } else {
+                        if (photo == null) {
+                          photo =
+                              'https://www.xovi.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png';
+                        }
+
+                        FirebaseFirestore.instance
+                            .collection("clients")
+                            .doc(uid)
+                            .set({
+                          "id": uid,
+                          "name": name,
+                          "email": email,
+                          "dob": ("${selectedDate.toLocal()}".split(' ')[0]),
+                          "number": number,
+                          "photo": photo,
+                        }).then((_) {
+                          Navigator.of(context).pushReplacementNamed('/home');
+                          Flushbar(
+                            message: "Profile Created!",
+                            duration: Duration(seconds: 3),
+                          )..show(context);
+                        });
+                      }
                     },
                     child: Container(
                       width: size.width * .8,

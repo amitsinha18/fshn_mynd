@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> signIn(String smsCode) async {
-    final AuthCredential credential = PhoneAuthProvider.getCredential(
+    final AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: smsCode,
     );
@@ -126,8 +126,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        resizeToAvoidBottomPadding: false,
+        backgroundColor: Color.fromRGBO(15, 16, 17, 1),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -158,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                        initialValue: '+91',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montserrat Regular',

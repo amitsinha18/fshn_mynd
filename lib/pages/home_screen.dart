@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yt_tutorial_app/pages/landing_page_widgets/cat_carousel.dart';
-import 'package:yt_tutorial_app/pages/landing_page_widgets/featured1.dart';
+import 'package:yt_tutorial_app/pages/landing_page_widgets/featured.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/pattern_boxes.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
 
@@ -14,15 +13,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(15, 16, 17, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
         toolbarHeight: 70,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromRGBO(15, 16, 17, 1),
         elevation: 0,
         title: Text(
           'MYND',

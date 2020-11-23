@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\User\\AndroidStudioProjects\\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\\build\\url_launcher\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-2\\files-2.1\\44b1706abe044cd42dcac5be863451ed\\core-1.1.0\\res\\drawable\\notification_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\AndroidStudioProjects\\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\\build\\url_launcher\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-2\\files-2.1\\44b1706abe044cd42dcac5be863451ed\\core-1.1.0\\res\\drawable\\notification_icon_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\AndroidStudioProjects\\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\\build\\url_launcher\\intermediates\\res\\merged\\debug\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-2\\files-2.1\\44b1706abe044cd42dcac5be863451ed\\core-1.1.0\\res\\drawable\\notification_tile_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\AndroidStudioProjects\\flutter_test-30864d5e5026c7a931cd1b8a5684d86b267df51e\\build\\url_launcher\\intermediates\\res\\merged\\debug\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\User\\.gradle\\caches\\transforms-2\\files-2.1\\44b1706abe044cd42dcac5be863451ed\\core-1.1.0\\res\\drawable\\notification_bg_low.xml"
+    }
+]

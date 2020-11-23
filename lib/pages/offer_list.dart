@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'landing_page_widgets/offerTabs.dart';
 import 'package:yt_tutorial_app/pages/landing_page_widgets/bottom_navBar.dart';
-import 'package:yt_tutorial_app/pages/landing_page_widgets/offers_c.dart';
+
+// import 'package:yt_tutorial_app/pages/landing_page_widgets/offers_c.dart';
 
 class OfferList extends StatefulWidget {
+  final int data;
+  OfferList({this.data});
+
   @override
   _OfferListState createState() => _OfferListState();
 }
 
 final String heading =
-    'C-NAME'; // Change heading based on the selected category
-
-int _currentIndex = 0;
+    'Category'; // Change heading based on the selected category
 
 void onClick(int index) {}
 
@@ -22,7 +25,8 @@ class _OfferListState extends State<OfferList>
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 4, vsync: this);
+    controller =
+        TabController(length: 4, vsync: this, initialIndex: widget.data);
   }
 
   @override
@@ -36,12 +40,12 @@ class _OfferListState extends State<OfferList>
     return DefaultTabController(
         length: 4,
         child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Color.fromRGBO(15, 16, 17, 1),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: true,
             toolbarHeight: 100,
-            backgroundColor: Colors.black,
+            backgroundColor: Color.fromRGBO(15, 16, 17, 1),
             elevation: 0,
             title: Text(
               heading,
@@ -72,89 +76,9 @@ class _OfferListState extends State<OfferList>
                     ]),
                 preferredSize: Size.fromHeight(30.0)),
           ),
-          body: Container(
-            child: Column(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .25,
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Gift Cards',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat Bold',
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.blue,
-                        width: MediaQuery.of(context).size.width,
-                        child: OfferC(),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .25,
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Vouchers',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat Bold',
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.blue,
-                        width: MediaQuery.of(context).size.width,
-                        child: OfferC(),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .25,
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Deals',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat Bold',
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.blue,
-                        width: MediaQuery.of(context).size.width,
-                        child: OfferC(),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+          body: TabBarView(
+            controller: controller,
+            children: [FashionTab(), BeautyTab(), LifestlyeTab(), MoreTab()],
           ),
           bottomNavigationBar: BottomNavBar(),
         ));

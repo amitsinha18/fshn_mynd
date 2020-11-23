@@ -7,17 +7,18 @@ import 'package:yt_tutorial_app/pages/user.dart';
 import 'pages/user.dart';
 import 'pages/login.dart';
 import 'pages/home_screen.dart';
-import 'pages/offer_list.dart';
 import 'pages/wall.dart';
 import 'pages/profile.dart';
 import 'pages/register.dart';
 import 'pages/reward_page.dart';
 import 'pages/offer_page.dart';
+import 'pages/ad_page.dart';
+// import 'pages/landing_page_widgets/offerTabs.dart';
 
 void main() async {
   // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([]);
+
   await Firebase.initializeApp();
   if (FirebaseAuth.instance.currentUser != null) {
     runApp(Home());
@@ -29,10 +30,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/offer': (BuildContext context) => new OfferList(),
+        // '/offer': (BuildContext context) => new OfferList(),
         '/login': (BuildContext context) => new LoginPage(),
         '/wall': (BuildContext context) => new WallPage(),
         '/user': (BuildContext context) => new UserPage(),
@@ -49,10 +55,15 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/offer': (BuildContext context) => new OfferList(),
+        // '/offer': (BuildContext context) => new OfferList(),
         '/login': (BuildContext context) => new LoginPage(),
         '/wall': (BuildContext context) => new WallPage(),
         '/user': (BuildContext context) => new UserPage(),
@@ -60,7 +71,8 @@ class Home extends StatelessWidget {
         '/home': (BuildContext context) => new HomeScreen(),
         '/register': (BuildContext context) => new RegisterPage(),
         '/reward': (BuildContext context) => new RewardPage(),
-        '/offerpage': (BuildContext context) => new OfferPage()
+        '/offerpage': (BuildContext context) => new OfferPage(),
+        '/adPage': (BuildContext context) => new AdPage()
       },
       home: HomeScreen(),
     );

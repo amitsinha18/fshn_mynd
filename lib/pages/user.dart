@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yt_tutorial_app/services/auth.dart';
 import 'package:yt_tutorial_app/pages/login.dart';
 import 'landing_page_widgets/bottom_navBar.dart';
@@ -10,6 +10,7 @@ String email = '';
 String number = '981231245';
 String dob = '12/12/12';
 String _proPic = '';
+String _uid = "";
 
 //Shared Preference
 // String email = 'email@address.com';
@@ -27,16 +28,25 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     _auth1.getCurrentUID().then((val) {
-      setState(() {
-        name = val.displayName;
-        email = val.email;
-        _proPic = val.photoURL;
+      _uid = val.uid;
+
+      FirebaseFirestore.instance
+          .collection("clients")
+          .doc(_uid)
+          .get()
+          .then((value) async {
+        setState(() {
+          name = value.data()['name'];
+          email = value.data()['email'];
+          number = value.data()['number'];
+          dob = value.data()['dob'];
+          _proPic = value.data()['photo'];
+        });
       });
     }).catchError((e) {
       print(e);
     });
     super.initState();
-    print(name);
   }
 
   double _width = 326;
@@ -46,7 +56,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(15, 16, 17, 1),
       body: Column(
         children: <Widget>[
           Container(
@@ -55,9 +65,10 @@ class _UserPageState extends State<UserPage> {
             child: Column(
               children: [
                 Container(
-                  width: 90,
-                  height: 93,
+                  // width: 90,
+                  // height: 93,
                   child: CircleAvatar(
+                    radius: 55,
                     backgroundImage: NetworkImage(_proPic),
                   ),
                 ),
@@ -93,7 +104,7 @@ class _UserPageState extends State<UserPage> {
                     });
                   },
                   onLongPress: () {
-                    Navigator.of(context).pushNamed('/profile');
+                    Navigator.of(context).pushReplacementNamed('/profile');
                   },
                   child: Stack(
                     children: [
@@ -224,7 +235,7 @@ class _UserPageState extends State<UserPage> {
                       });
                     },
                     onLongPress: () {
-                      // Navigator.of(context).pushNamed('/reward');
+                      Navigator.of(context).pushNamed('/reward');
                     },
                     child: Stack(children: [
                       AnimatedContainer(
@@ -237,16 +248,16 @@ class _UserPageState extends State<UserPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        child: Text(
-                                          '$myPoints myPoints',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat Regular',
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white,
+                                          // child: Text(
+                                          //   '$myPoints myPoints',
+                                          //   style: TextStyle(
+                                          //     fontFamily: 'Montserrat Regular',
+                                          //     fontSize: 14,
+                                          //     fontWeight: FontWeight.w400,
+                                          //     color: Colors.white,
+                                          //   ),
+                                          // ),
                                           ),
-                                        ),
-                                      ),
                                       Container(
                                         margin:
                                             EdgeInsets.only(top: 10, left: 60),
@@ -286,7 +297,7 @@ class _UserPageState extends State<UserPage> {
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 child: Text(
-                                  'My Rewards',
+                                  'Refferals',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat Bold',
                                     fontSize: 16,
